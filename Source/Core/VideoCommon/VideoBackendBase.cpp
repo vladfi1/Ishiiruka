@@ -10,6 +10,7 @@
 #include "VideoBackends/DX11/VideoBackend.h"
 #include "VideoBackends/D3D12/VideoBackend.h"
 #endif
+#include "VideoBackends/Null/VideoBackend.h"
 #include "VideoBackends/OGL/VideoBackend.h"
 #include "VideoBackends/Software/VideoBackend.h"
 #ifndef __APPLE__
@@ -28,7 +29,7 @@ static VideoBackendBase* s_default_backend = nullptr;
 
 void VideoBackendBase::PopulateList()
 {
-	// D3D11 > D3D12 > D3D9 > OGL > VULKAN > SW
+	// D3D11 > D3D12 > D3D9 > OGL > VULKAN > SW > Null
 #ifdef _WIN32
 	if (IsWindowsVistaOrGreater())
 	{
@@ -50,6 +51,7 @@ void VideoBackendBase::PopulateList()
 #endif
 	// Disable software video backend as is currently not working
 	//g_available_video_backends.push_back(std::make_unique<SW::VideoSoftware>());
+  g_available_video_backends.push_back(std::make_unique<Null::VideoBackend>());
 
 	for (auto& backend : g_available_video_backends)
 	{
