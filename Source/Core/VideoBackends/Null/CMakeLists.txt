@@ -2,7 +2,7 @@ set(SRCS
 	NullBackend.cpp
 	Render.cpp
 	VertexManager.cpp
-	ShaderCache.cpp
+	#ShaderCache.cpp
 )
 
 set(LIBS
