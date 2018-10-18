@@ -11,6 +11,7 @@
 #include "VideoCommon/PixelShaderGen.h"
 #include "VideoCommon/VertexShaderGen.h"
 #include "VideoCommon/VideoCommon.h"
+#include "VideoCommon/VertexLoaderManager.h"
 
 namespace Null
 {
@@ -44,7 +45,7 @@ protected:
   {
     VertexShaderUid uid;
     std::cout << "VertexShaderCache.GetUid\n";
-    GetVertexShaderUID(uid, 0, xfmem, bpmem);
+    GetVertexShaderUID(uid, VertexLoaderManager::g_current_components, xfmem, bpmem);
     return uid;
   }
   ShaderCode GenerateCode(VertexShaderUid uid) override
@@ -66,7 +67,7 @@ protected:
   {
     std::cout << "GeometryShaderCache.GetUid\n";
     GeometryShaderUid uid;
-    GetGeometryShaderUid(uid, primitive_type, xfmem, 0);
+    GetGeometryShaderUid(uid, primitive_type, xfmem, VertexLoaderManager::g_current_components);
     return uid;
   }
   ShaderCode GenerateCode(GeometryShaderUid uid) override
@@ -88,7 +89,7 @@ protected:
   {
     std::cout << "PixelShaderCache.GetUid\n";
     PixelShaderUid uid;
-    GetPixelShaderUID(uid, PSRM_DEFAULT, 0, xfmem, bpmem);
+    GetPixelShaderUID(uid, PSRM_DEFAULT, VertexLoaderManager::g_current_components, xfmem, bpmem);
     return uid;
   }
   ShaderCode GenerateCode(PixelShaderUid uid) override
