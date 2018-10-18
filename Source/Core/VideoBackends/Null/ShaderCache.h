@@ -44,14 +44,12 @@ protected:
   VertexShaderUid GetUid(PrimitiveType primitive_type) override
   {
     VertexShaderUid uid;
-    std::cout << "VertexShaderCache.GetUid\n";
     GetVertexShaderUID(uid, VertexLoaderManager::g_current_components, xfmem, bpmem);
     return uid;
   }
   ShaderCode GenerateCode(VertexShaderUid uid) override
   {
     ShaderCode code;
-    std::cout << "VertexShaderCache.GenerateCode\n";
     GenerateVertexShaderCodeGL(code, uid.GetUidData());
     return code;
   }
@@ -65,7 +63,6 @@ public:
 protected:
   GeometryShaderUid GetUid(PrimitiveType primitive_type) override
   {
-    std::cout << "GeometryShaderCache.GetUid\n";
     GeometryShaderUid uid;
     GetGeometryShaderUid(uid, primitive_type, xfmem, VertexLoaderManager::g_current_components);
     return uid;
@@ -73,7 +70,6 @@ protected:
   ShaderCode GenerateCode(GeometryShaderUid uid) override
   {
     ShaderCode code;
-    std::cout << "GeometryShaderCache.GenerateCode\n";
     GenerateGeometryShaderCode(code, uid.GetUidData(), API_OPENGL);
     return code;
   }
@@ -87,7 +83,6 @@ public:
 protected:
   PixelShaderUid GetUid(PrimitiveType primitive_type) override
   {
-    std::cout << "PixelShaderCache.GetUid\n";
     PixelShaderUid uid;
     GetPixelShaderUID(uid, PSRM_DEFAULT, VertexLoaderManager::g_current_components, xfmem, bpmem);
     return uid;
@@ -95,7 +90,6 @@ protected:
   ShaderCode GenerateCode(PixelShaderUid uid) override
   {
     ShaderCode code;
-    std::cout << "PixelShaderCache.GenerateCode\n";
     GeneratePixelShaderCodeGL(code, uid.GetUidData());
     return code;
   }
