@@ -51,7 +51,6 @@ void VideoBackend::InitBackendInfo()
 
 bool VideoBackend::Initialize(void* window_handle)
 {
-  std::cout << "VideoBackend::Initialize\n";
   InitializeShared();
   InitBackendInfo();
 
@@ -62,7 +61,6 @@ bool VideoBackend::Initialize(void* window_handle)
 // Run from the graphics thread
 void VideoBackend::Video_Prepare()
 {
-  std::cout << "VideoBackend::VideoPrepare\n";
   g_renderer = std::make_unique<Renderer>();
   g_vertex_manager = std::make_unique<VertexManager>();
   g_perf_query = std::make_unique<PerfQuery>();

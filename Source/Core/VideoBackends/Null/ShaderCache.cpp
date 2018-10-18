@@ -35,7 +35,6 @@ void ShaderCache<Uid>::Clear()
 template <typename Uid>
 bool ShaderCache<Uid>::SetShader(PrimitiveType primitive_type)
 {
-  std::cout << "ShaderCache.SetShader\n";
   Uid uid = GetUid(primitive_type);
 
   // Check if the shader is already set
