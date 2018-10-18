@@ -26,6 +26,6 @@ private:
   std::vector<u8> m_local_v_buffer;
   std::vector<u16> m_local_i_buffer;
   
-  u16* GetIndexBuffer() override {return nullptr;}
+  u16* GetIndexBuffer() override {return m_local_i_buffer.data();}
 };
 }

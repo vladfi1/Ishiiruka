@@ -3,7 +3,7 @@
 // Refer to the license.txt file included.
 
 #include "VideoBackends/Null/VertexManager.h"
-//#include "VideoBackends/Null/ShaderCache.h"
+#include "VideoBackends/Null/ShaderCache.h"
 
 #include "VideoCommon/IndexGenerator.h"
 #include "VideoCommon/Statistics.h"
@@ -35,8 +35,8 @@ VertexManager::~VertexManager()
 
 void VertexManager::ResetBuffer(u32 stride)
 {
-  //s_pCurBufferPointer = s_pBaseBufferPointer = m_local_v_buffer.data();
-  //s_pEndBufferPointer = s_pCurBufferPointer + m_local_v_buffer.size();
+  m_pCurBufferPointer = m_pBaseBufferPointer = m_local_v_buffer.data();
+  m_pEndBufferPointer = m_pCurBufferPointer + m_local_v_buffer.size();
   IndexGenerator::Start(&m_local_i_buffer[0]);
 }
 

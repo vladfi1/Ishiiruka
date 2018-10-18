@@ -25,8 +25,8 @@ public:
   bool SetShader(PrimitiveType primitive_type);
 
 protected:
-  virtual Uid GetUid(PrimitiveType primitive_type, APIType api_type) = 0;
-  virtual ShaderCode GenerateCode(APIType api_type, Uid uid) = 0;
+  virtual Uid GetUid(PrimitiveType primitive_type) = 0;
+  virtual ShaderCode GenerateCode(Uid uid) = 0;
 
 private:
   std::map<Uid, std::string> m_shaders;
@@ -40,13 +40,17 @@ public:
   static std::unique_ptr<VertexShaderCache> s_instance;
 
 protected:
-  VertexShaderUid GetUid(PrimitiveType primitive_type, APIType api_type) override
+  VertexShaderUid GetUid(PrimitiveType primitive_type) override
   {
-    return GetVertexShaderUid();
+    VertexShaderUid uid;
+    GetVertexShaderUID(uid, 0, xfmem, bpmem);
+    return uid;
   }
-  ShaderCode GenerateCode(APIType api_type, VertexShaderUid uid) override
+  ShaderCode GenerateCode(VertexShaderUid uid) override
   {
-    return GenerateVertexShaderCode(api_type, ShaderHostConfig::GetCurrent(), uid.GetUidData());
+    ShaderCode code;
+    GenerateVertexShaderCodeGL(code, uid.GetUidData());
+    return code;
   }
 };
 
@@ -56,13 +60,17 @@ public:
   static std::unique_ptr<GeometryShaderCache> s_instance;
 
 protected:
-  GeometryShaderUid GetUid(PrimitiveType primitive_type, APIType api_type) override
+  GeometryShaderUid GetUid(PrimitiveType primitive_type) override
   {
-    return GetGeometryShaderUid(primitive_type);
+    GeometryShaderUid uid;
+    GetGeometryShaderUid(uid, primitive_type, xfmem, 0);
+    return uid;
   }
-  ShaderCode GenerateCode(APIType api_type, GeometryShaderUid uid) override
+  ShaderCode GenerateCode(GeometryShaderUid uid) override
   {
-    return GenerateGeometryShaderCode(api_type, ShaderHostConfig::GetCurrent(), uid.GetUidData());
+    ShaderCode code;
+    GenerateGeometryShaderCode(code, uid.GetUidData(), API_OPENGL);
+    return code;
   }
 };
 
@@ -72,13 +80,17 @@ public:
   static std::unique_ptr<PixelShaderCache> s_instance;
 
 protected:
-  PixelShaderUid GetUid(PrimitiveType primitive_type, APIType api_type) override
+  PixelShaderUid GetUid(PrimitiveType primitive_type) override
   {
-    return GetPixelShaderUid();
+    PixelShaderUid uid;
+    GetPixelShaderUID(uid, 0, 0, xfmem, bpmem);
+    return uid;
   }
-  ShaderCode GenerateCode(APIType api_type, PixelShaderUid uid) override
+  ShaderCode GenerateCode(PixelShaderUid uid) override
   {
-    return GeneratePixelShaderCode(api_type, ShaderHostConfig::GetCurrent(), uid.GetUidData());
+    ShaderCode code;
+    GeneratePixelShaderCodeGL(code, uid.GetUidData());
+    return code;
   }
 };
 
