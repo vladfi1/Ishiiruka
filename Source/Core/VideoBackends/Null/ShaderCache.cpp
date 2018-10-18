@@ -35,7 +35,8 @@ void ShaderCache<Uid>::Clear()
 template <typename Uid>
 bool ShaderCache<Uid>::SetShader(PrimitiveType primitive_type)
 {
-  Uid uid = GetUid(primitive_type, APIType::OpenGL);
+  std::cout << "ShaderCache.SetShader\n";
+  Uid uid = GetUid(primitive_type);
 
   // Check if the shader is already set
   if (m_last_entry)
@@ -60,7 +61,7 @@ bool ShaderCache<Uid>::SetShader(PrimitiveType primitive_type)
   }
 
   // Need to compile a new shader
-  ShaderCode code = GenerateCode(APIType::OpenGL, uid);
+  ShaderCode code = GenerateCode(uid);
   m_shaders.emplace(uid, code.GetBuffer());
 
   GFX_DEBUGGER_PAUSE_AT(NEXT_PIXEL_SHADER_CHANGE, true);

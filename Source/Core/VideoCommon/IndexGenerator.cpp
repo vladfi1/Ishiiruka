@@ -42,6 +42,7 @@ void IndexGenerator::Start(u16* Indexptr)
 
 void IndexGenerator::AddIndices(int primitive, u32 numVerts)
 {
+  std::cout << "IndexGenerator::AddIndices(" << primitive << ", " << numVerts << ")\n";
 	primitive_table[primitive](numVerts);
 	base_index += numVerts;
 }
@@ -201,6 +202,7 @@ void IndexGenerator::AddLineStrip(u32 numVerts)
 // Points
 void IndexGenerator::AddPoints(u32 numVerts)
 {
+  std::cout << "IndexGenerator::AddPoints" << numVerts << "\n";
 	u32 i = base_index;
 	u32 top = (base_index + numVerts);
 	u16 *ptr = index_buffer_current;

@@ -35,6 +35,7 @@ VertexManager::~VertexManager()
 
 void VertexManager::ResetBuffer(u32 stride)
 {
+  std::cout << "VertexManager::ResetBuffer\n";
   m_pCurBufferPointer = m_pBaseBufferPointer = m_local_v_buffer.data();
   m_pEndBufferPointer = m_pCurBufferPointer + m_local_v_buffer.size();
   IndexGenerator::Start(&m_local_i_buffer[0]);
@@ -42,6 +43,7 @@ void VertexManager::ResetBuffer(u32 stride)
 
 void VertexManager::vFlush(bool use_dst_alpha)
 {
+  std::cout << "VertexManager::vFlush\n";
 /*
   VertexShaderCache::s_instance->SetShader(
       use_dst_alpha ? DSTALPHA_DUAL_SOURCE_BLEND : DSTALPHA_NONE, current_primitive_type);

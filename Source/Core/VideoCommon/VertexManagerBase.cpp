@@ -237,6 +237,7 @@ void VertexManagerBase::DoFlush()
 		}
 		else if (IndexGenerator::GetIndexLen() >= 3)
 		{
+		  std::cout << "IndexLen = " << IndexGenerator::GetIndexLen() << "\n";
 			CalculateZSlope(vtx_dcl, g_vertex_manager->GetIndexBuffer() + IndexGenerator::GetIndexLen() - 3);
 		}
 
