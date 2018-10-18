@@ -3,7 +3,6 @@
 // Refer to the license.txt file included.
 
 #include "VideoBackends/Null/VertexManager.h"
-#include "VideoBackends/Null/ShaderCache.h"
 
 #include "VideoCommon/IndexGenerator.h"
 #include "VideoCommon/Statistics.h"
@@ -40,11 +39,6 @@ void VertexManager::ResetBuffer(u32 stride)
   IndexGenerator::Start(&m_local_i_buffer[0]);
 }
 
-void VertexManager::vFlush(bool use_dst_alpha)
-{
-  VertexShaderCache::s_instance->SetShader(m_current_primitive_type);
-  GeometryShaderCache::s_instance->SetShader(m_current_primitive_type);
-  PixelShaderCache::s_instance->SetShader(m_current_primitive_type);
-}
+void VertexManager::vFlush(bool use_dst_alpha) {}
 
 }  // namespace
